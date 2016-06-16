@@ -7,6 +7,7 @@ using DonNetCore.Services;
 using Microsoft.CodeAnalysis.Options;
 using DonNetCore.Configuration;
 using Microsoft.Extensions.Options;
+using DonNetCore.Models;
 
 namespace DonNetCore.Controllers
 {
@@ -39,9 +40,19 @@ namespace DonNetCore.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            Person p = new Person()
+            {
+                Id = "A123",
+                Name = "Miles",
+                Password = "qq"
+            };
+            return View(p);
+        }
 
-            return View();
+        [HttpPost]
+        public IActionResult About(Person person)
+        {
+            return View(person);
         }
 
         public IActionResult Contact()
