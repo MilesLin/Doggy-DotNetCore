@@ -1,4 +1,6 @@
 ﻿@model Person
+@inject DonNetCore.Models.Services.ProfileOptionsService options
+
 @{
     ViewData["Title"] = "About";
 }
@@ -25,6 +27,17 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="form-group">
+        <label asp-for="Gender" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            @*<select asp-for="Gender" asp-items="options.ListGenders"></select>*@
+            <select asp-for="Gender"
+                    asp-items="Html.GetEnumSelectList<Gender>()">                
+            </select> 
+        </div>
+    </div>
+ 
     <div class="form-group">
         <label asp-for="Password" class="col-md-2 control-label"></label>
         <div class="col-md-10">

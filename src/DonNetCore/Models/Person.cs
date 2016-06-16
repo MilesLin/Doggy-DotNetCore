@@ -17,10 +17,10 @@ namespace DonNetCore.Models
         [DataType(dataType:DataType.Password)]
         public string Password { get; set; }
 
-        public Sex Sex { get; set; }
+        public Gender Gender { get; set; }
     }
 
-    public enum Sex
+    public enum Gender
     {
         Male,
         Female

@@ -13,6 +13,7 @@ using DonNetCore.Data;
 using DonNetCore.Models;
 using DonNetCore.Services;
 using DonNetCore.Configuration;
+using DonNetCore.Models.Services;
 
 namespace DonNetCore
 {
@@ -63,6 +64,7 @@ namespace DonNetCore
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IDatetime, SystemDatetime>();
+            services.AddTransient<ProfileOptionsService, ProfileOptionsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
