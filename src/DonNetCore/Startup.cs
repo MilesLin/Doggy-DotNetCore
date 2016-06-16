@@ -59,7 +59,9 @@ namespace DonNetCore
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-            
+
+            services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();

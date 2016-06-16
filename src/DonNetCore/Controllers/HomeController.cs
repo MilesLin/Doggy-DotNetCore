@@ -15,13 +15,16 @@ namespace DonNetCore.Controllers
     {
         IDatetime _datetime;
         MyOptions _options;
+        ProductContext _db;
         public HomeController(
             IDatetime datetime,
-            IOptions<MyOptions> setting
+            IOptions<MyOptions> setting,
+            ProductContext db
             )
         {
             this._datetime = datetime;
             this._options = setting.Value;
+            this._db = db;
         }
 
         //public IActionResult Index([FromServices] IDatetime datetime)
@@ -40,6 +43,7 @@ namespace DonNetCore.Controllers
 
         public IActionResult Index()
         {
+            this._db.Database.EnsureCreated();
             var now = _datetime.Now();
 
             return View();
