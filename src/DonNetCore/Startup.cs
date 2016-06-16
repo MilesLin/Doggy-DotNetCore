@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using DonNetCore.Data;
 using DonNetCore.Models;
 using DonNetCore.Services;
+using DonNetCore.Configuration;
 
 namespace DonNetCore
 {
@@ -22,8 +23,9 @@ namespace DonNetCore
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("SampleSetting.json", optional: false, reloadOnChange: true);
+            
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
@@ -42,6 +44,9 @@ namespace DonNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<MyOptions>(Configuration);
+            
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
@@ -53,7 +58,7 @@ namespace DonNetCore
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-
+            
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
