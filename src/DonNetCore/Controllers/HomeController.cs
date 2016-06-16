@@ -31,6 +31,13 @@ namespace DonNetCore.Controllers
         //    return View();
         //}
 
+        //public IActionResult Index([FromRoute] int id)
+        //{
+        //    var now = _datetime.Now();
+
+        //    return View();
+        //}
+
         public IActionResult Index()
         {
             var now = _datetime.Now();
